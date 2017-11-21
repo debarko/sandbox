@@ -8,7 +8,7 @@ let get = (callback) => {
     pg = require('knex')({
         client: 'pg',
         connection: process.env.DATABASE_URL,
-        pool: { min: 1, max: 2 ,afterCreate: (conn, done) => {callback(conn)}}
+        pool: { min: 1, max: 10 ,afterCreate: (conn, done) => {callback(conn)}}
     });
 };
 

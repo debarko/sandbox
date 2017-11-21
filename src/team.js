@@ -3,8 +3,8 @@ const btoa = require('btoa');
 const atob = require('atob');
 
 let getUser = (token, callback) => {
-    let query = `SELECT * from users where token = '${token}' ORDER BY id DESC LIMIT 1`;
-    db.query(query, (err, result) => {
+    let query = 'SELECT * from users where token = $1 ORDER BY id DESC LIMIT 1';
+    db.query(query, [token], (err, result) => {
         if (err) throw err;
         let user = result.rows[0];
         callback(user);
@@ -19,8 +19,8 @@ let getTeam = (user, callback) => {
       return;
     }
     let username = user.username;
-    let query = `SELECT teams.id, teams.name, teams.track from teams join team_members on teams.id = team_members.team_id WHERE team_members.username = '${username}' LIMIT 1`;
-    db.query(query, (err, result) => {
+    let query = `SELECT teams.id, teams.name, teams.track from teams join team_members on teams.id = team_members.team_id WHERE team_members.username = $1 LIMIT 1`;
+    db.query(query, [username], (err, result) => {
         if (err) throw err;
         let team = result.rows[0];
         callback(team);
@@ -28,8 +28,8 @@ let getTeam = (user, callback) => {
 };
 
 let getMembers = (team, callback) => {
-    let query = `SELECT * from team_members JOIN users on team_members.username = users.username where team_id = ${team.id}`;
-    db.query(query, (err, results) => {
+    let query = `SELECT * from team_members JOIN users on team_members.username = users.username where team_id = $1`;
+    db.query(query, [team.id], (err, results) => {
         if (err) throw err;
         let members = results.rows;
         callback(members);
@@ -75,17 +75,16 @@ let render = (req, res) => {
 
 let addMember = (team_id, user, callback) => {
     let username = user.username;
-    let query = `INSERT INTO team_members (team_id, username) VALUES (${team_id}, '${username}')`;
-    db.query(query, (err, results) => {
+    let query = `INSERT INTO team_members (team_id, username) VALUES ($1, $2)`;
+    db.query(query, [team_id, username], (err, results) => {
         if (err) throw err;
         callback();
     });
 };
 
 let create = (name, user, res) => {
-    let username = user.username;
-    let query = `INSERT INTO teams (name) VALUES ('${name}') RETURNING id`;
-    db.query(query, (err, results) => {
+    let query = `INSERT INTO teams (name) VALUES ($1) RETURNING id`;
+    db.query(query, [name], (err, results) => {
         if (err) throw err;
         let id = results.rows[0].id;
         addMember(id, user, () => res.end('Created'));
@@ -94,8 +93,8 @@ let create = (name, user, res) => {
 
 let update = (name, track, team, res) => {
     name = name.replace(/\'/g, '\'\''); // Handling single quotes
-    let query = `UPDATE teams SET name = '${name}', track = '${track}' WHERE id = ${team.id}`;
-    db.query(query, (err, result) => {
+    let query = `UPDATE teams SET name = $1, track = $2 WHERE id = $3`;
+    db.query(query, [name, track, team.id], (err, result) => {
         if (err) throw err;
         res.end('Saved');
     });
@@ -114,8 +113,8 @@ let save = (req, res) => {
 
 let leave = (req, res) => {
     getUser(req.cookies.token, (user) => {
-        let query = `DELETE from team_members WHERE username = '${user.username}'`;
-        db.query(query, (err, result) => {
+        let query = `DELETE from team_members WHERE username = $1`;
+        db.query(query, [user.username], (err, result) => {
             if (err) throw err;
             if (req.callback) req.callback();
             else res.redirect('/team');
@@ -126,8 +125,8 @@ let leave = (req, res) => {
 let getTeamFromHash = (hash, callback) => {
     let salt = process.env.SALT;
     let teamId = atob(hash).replace(salt, '').replace(salt, '');
-    let query = `SELECT teams.id, teams.name from teams WHERE id = '${teamId}'`;
-    db.query(query, (err, result) => {
+    let query = `SELECT teams.id, teams.name from teams WHERE id = $1`;
+    db.query(query, [teamId], (err, result) => {
         if (err) throw err;
         callback(result.rows[0]);
     })

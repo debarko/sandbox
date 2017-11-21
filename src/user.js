@@ -23,9 +23,10 @@ let auth = (req, res) => {
             let name = user.name;
             let email = user.email;
             let query = `INSERT INTO users (github_id, username, token, name, email) `;
-            query += `VALUES('${github_id}', '${username}', '${token}', '${name}', '${email}') `;
-            query += `ON CONFLICT (github_id) DO UPDATE SET token = '${token}'`;
-            db.query(query, (err, result) => {
+            query += `VALUES($1, $2, $3, $4, $5) `;
+            query += `ON CONFLICT (github_id) DO UPDATE SET token = $6`;
+            let values = [github_id, username, token, name, email, token];
+            db.query(query, values, (err, result) => {
                 if (err) throw err;
                 if (req.cookies.teamintent) res.redirect('/join');
                 else res.redirect('/team');
@@ -38,8 +39,8 @@ let auth = (req, res) => {
 let tshirt = (req, res) => {
     let size = req.body.size;
     get(req.cookies.token, (user) => {
-        let query = `UPDATE users SET tshirt = '${size}' WHERE username = '${user.login}'`;
-        db.query(query, (err, result) => {
+        let query = `UPDATE users SET tshirt = $1 WHERE username = $2`;
+        db.query(query, [size, user.login], (err, result) => {
             if (err) throw err;
             res.end('Saved');
         });
