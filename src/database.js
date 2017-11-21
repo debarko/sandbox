@@ -1,13 +1,14 @@
 if (!process.env.production) require('dotenv').config();
-const pg = require('pg');
+let pg = require('pg');
 
 let get = (callback) => {
     let database;
 
     pg.defaults.ssl = true;
-    pg.connect(process.env.DATABASE_URL, (err, client) => {
-        if (err) throw err;
-        callback(client);
+    pg = require('knex')({
+        client: 'pg',
+        connection: process.env.DATABASE_URL,
+        pool: { min: 1, max: 2 ,afterCreate: (conn, done) => {callback(conn)}}
     });
 };
 
