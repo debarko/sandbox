@@ -1,0 +1,38 @@
+include ./head.pug
+
+style
+    include ../static/styles/animations.css
+
+.hero.fade-in.long(style='text-align:center')
+    img.logo.zoom-out(src='img/logo.png')
+    .tagline Practo Sandbox 6 Terms &amp; Conditions
+
+    div.rules
+      span Judging Criterion
+      ul
+        li All Practo Sandbox entries will be judged by the Practo Sandbox Judging Panel against the following criteria:
+        li Originality
+        li The relevance project to the chosen track.
+        li Specific award eligibility criteria detailed (track pizes)
+        li Consistency with contest purposes including social value
+        li Quality and design
+        li Usability
+      br
+      span How to chose a hackathon project?
+      br
+      br
+      div.project-selection Not every project makes a good hackathon project. It is extremely important to maximize the following qualities in the projects at your event:
+      ul
+        li Clearly articulated. Projects should have a clear question or problem they are trying to solve plus a reasonably specific proposed solution.
+        li Attainable. Most projects will accomplish about 25% of what they think they can accomplish in the limited time they have. Manage each project’s goals so participants are able to feel accomplished at the end of the session, not interrupted.
+        li Easy to onboard newcomers. Projects should have ready-to-go tasks for newcomers with a variety of skills and at a variety of skill levels. For coding projects, these tasks can’t require an intimate understanding of the code base, and make sure the build environment can be spun up in less than 20 minutes. Make a list of tasks or create github issues ahead of time!
+        li Led by a stakeholder. A stakeholder (or “subject matter expert”) guides a project to real-world relevance. Projects without a stakeholder can “solve” a problem that doesn’t exist. Ideally the leader (or one of the leaders) is a stakeholder, or a good proxy for a stakeholder. I strongly recommend reviewing Laurenellen McCann’s Build With, Not For series on involving stakeholders in all civic tech work. Additionally, it is never enough for a project leader to just be an ideas person. Beware when the leader is a stakeholder but can’t foresee how he or she might be implementing along with the rest of the team.
+        li Organized. For projects with three or more members, especially newcomers, the project leader’s role should be to coordinate, ensuring each team member has something to work on and helping to welcome new team members.
+      div.project-selection Treat these bullets like a checklist. Projects that think about themselves in terms of these qualities tend to be happier and more productive.
+
+include ./menu-band.pug
+
+style
+    include ../static/styles/home.css
+
+include ./common-styles.pug

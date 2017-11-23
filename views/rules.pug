@@ -1,0 +1,50 @@
+include ./head.pug
+
+style
+    include ../static/styles/animations.css
+
+.hero.fade-in.long(style='text-align:center')
+    img.logo.zoom-out(src='img/logo.png')
+    .tagline Practo Sandbox 6 Rules &amp; Regulations
+    p
+      br
+      div.rules We know some rules are meant to be broken, but you should probably (read: definitely) stick by these:
+      br
+      div.rules
+        span
+          strong Fresh Code
+        br
+        span.We all start coding at the same time. This is done to keep things fair. No one is allowed to come in and build on top of previous projects. It’s cool to work on designs beforehand, digital mockups, open source frameworks, and anything else available to everyone, but keep things within fair limits.
+      div.rules
+        span 
+          strong Code Review
+        br
+        span Winning teams may be subject to a code-review at some point following the event or immediately before winning. This is to ensure that all code used is in fact fresh.
+      div.rules
+        span
+          strong Ownership and IP
+        br
+        span Teams have full ownership of everything they build at our events and are free to do with it as they wish.
+      div.rules
+        span
+          strong Team Size
+        br
+        span No more than four people.
+      div.rules
+        span
+          strong Judging
+        br
+        span There will be a prelims round where judges will come to your place and analyze your project. Based on selection from the prelims round, teams will present on the final stage.
+      div.rules
+        span
+          strong DEMO your Hack
+        br
+        span You must demo your hack in order to present. No slide-decks or Powerpoints will be allowed. Four minute timed presentation and one minute Q&A from Judges.
+
+
+include ./menu-band.pug
+
+style
+    include ../static/styles/home.css
+
+include ./common-styles.pug

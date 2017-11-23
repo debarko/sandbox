@@ -29,6 +29,22 @@ app.get('/', (req, res) => {
     else res.render('home', {client_id: process.env.GITHUB_ID});
 });
 
+app.get('/rules', (req, res) => {
+    res.render('rules');
+});
+
+app.get('/terms', (req, res) => {
+    res.render('terms');
+});
+
+app.get('/judging', (req, res) => {
+    res.render('judging');
+});
+
+app.get('/contact', (req, res) => {
+    res.render('contact');
+});
+
 app.get('/team', team.render);
 app.post('/team', team.save);
 app.get('/leave', team.leave);
