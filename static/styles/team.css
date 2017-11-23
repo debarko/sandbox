@@ -23,7 +23,7 @@ body {
 .member {
     padding: 5px;
 }
-#name-message, #track-message, #tshirt-message {
+#name-message, #track-message, #tshirt-message, #linkedin-message {
     display: inline-block;
 }
 .saved {

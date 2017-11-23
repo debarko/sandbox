@@ -57,3 +57,4 @@ app.get('/join', team.join);
 app.get('/auth', user.auth);
 
 app.post('/tshirt', user.tshirt);
+app.post('/linkedin', user.linkedin);

@@ -14,7 +14,7 @@ link(rel='stylesheet', href='styles/team.css')
     <br /><br />
     if (team.name)
         label select track
-        each track in ['design', 'hardware', 'open track', 'dev tools', 'data viz', 'quality']
+        each track in ['doctor love', 'learning algorithms', 'health transactions']
             if (team.track == track)
                 input(type='radio', name='track', value=track id=track checked=true)
             else
@@ -38,6 +38,11 @@ if (team.name)
             span(style='color:#1268A2')=team.inviteLink
             span &nbsp;
             a(id='copy', data-clipboard-text=team.inviteLink) copy
+
+    .t-shirt
+        label your linkedin profile url (mandatory)
+        input#linkedin(type='text', placeholder='enter the full url....', value=user.linkedinurl)
+        label#linkedin-message
 
     .t-shirt
         label your t-shirt size

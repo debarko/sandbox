@@ -49,13 +49,23 @@ var saveTeam = debounce(function(event) {
 
 var saveTshirt = debounce(function() {
     var size = $('#tshirt').val();
+    size = size.substr(0,10);
     var messageElement = $('#tshirt-message');
     var url = '/tshirt';
     save(url, {size: size}, messageElement);
 }, 500);
 
+var saveLinkedin = debounce(function() {
+    var linkedinurl = $('#linkedin').val();
+    linkedinurl = linkedinurl.substr(0,250);
+    var messageElement = $('#linkedin-message');
+    var url = '/linkedin';
+    save(url, {linkedinurl: linkedinurl}, messageElement);
+}, 500);
+
 $('#team-name').on('input', saveTeam);
 $('#tshirt').on('input', saveTshirt);
+$('#linkedin').on('input', saveLinkedin);
 $('input[name="track"]').on('change', saveTeam);
 $('#copy').on('click', function() {
     $('#copy').text('copied').addClass('saved');

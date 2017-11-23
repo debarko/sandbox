@@ -47,4 +47,15 @@ let tshirt = (req, res) => {
     });
 };
 
-module.exports = {get, save, auth, tshirt};
+let linkedin = (req, res) => {
+    let linkedinurl = req.body.linkedinurl;
+    get(req.cookies.token, (user) => {
+        let query = `UPDATE users SET linkedinurl = $1 WHERE username = $2`;
+        db.query(query, [linkedinurl, user.login], (err, result) => {
+            if (err) throw err;
+            res.end('Saved');
+        });
+    });
+};
+
+module.exports = {get, save, auth, tshirt, linkedin};
