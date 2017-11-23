@@ -45,6 +45,10 @@ app.get('/contact', (req, res) => {
     res.render('contact');
 });
 
+app.get('/schedule', (req, res) => {
+    res.render('schedule');
+});
+
 app.get('/team', team.render);
 app.post('/team', team.save);
 app.get('/leave', team.leave);

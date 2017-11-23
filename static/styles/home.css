@@ -30,8 +30,26 @@
 .band {
     background: #EEE;
     text-align: center;
-    height: 10vh;
+    min-height: 10vh;
     line-height: 10vh;
+}
+
+@media only screen and (max-width: 500px) {
+    .band {
+        /* height: 20vh !important; */
+    }
+
+    .long {
+        padding-bottom: 22vh !important;
+    }
+    
+    .mobile-only {
+        display: block !important;
+    }
+}
+
+.mobile-only {
+    display: none;
 }
 
 .long {
