@@ -16,9 +16,7 @@
     padding: 5vh 0;
 }
 .hero .logo {
-    padding: 5vh 0 2vh;
-    height: 30vh;
-    width: auto;
+    width: 80%;
 }
 .hero .tagline {
     padding-top: 5vh;

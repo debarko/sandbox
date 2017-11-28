@@ -3,12 +3,14 @@ if (!process.env.production) {
 }
 
 const express = require('express');
+const helmet = require('helmet');
 const pug = require('pug');
 
 const user = require('./src/user');
 const team = require('./src/team');
 
 const app = express();
+app.use(helmet());
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/static'));
 
