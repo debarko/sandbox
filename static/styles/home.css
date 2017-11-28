@@ -21,12 +21,17 @@
     width: auto;
 }
 .hero .tagline {
-    padding-top: 0;
+    padding-top: 5vh;
     color: #999;
 }
 .hero .register {
     padding: 10vh 0;
 }
+
+.banner-container {
+    background-color: #29328c !important;
+}
+
 .band {
     background: #EEE;
     text-align: center;
@@ -35,6 +40,10 @@
 }
 
 @media only screen and (max-width: 500px) {
+    .hero .logo {
+        width: 100%;
+        height: auto;
+    }
     .band {
         /* height: 20vh !important; */
     }
