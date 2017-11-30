@@ -39,8 +39,8 @@ app.get('/terms', (req, res) => {
     res.render('terms');
 });
 
-app.get('/judging', (req, res) => {
-    res.render('judging');
+app.get('/details', (req, res) => {
+    res.render('details');
 });
 
 app.get('/contact', (req, res) => {
