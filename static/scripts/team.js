@@ -63,6 +63,16 @@ var saveLinkedin = debounce(function() {
     save(url, {linkedinurl: linkedinurl}, messageElement);
 }, 500);
 
+var logout = function() {
+    delete_cookie('token');
+    location.reload();
+};
+
+var delete_cookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+
+
 $('#team-name').on('input', saveTeam);
 $('#tshirt').on('input', saveTshirt);
 $('#linkedin').on('input', saveLinkedin);
@@ -70,5 +80,6 @@ $('input[name="track"]').on('change', saveTeam);
 $('#copy').on('click', function() {
     $('#copy').text('copied').addClass('saved');
 });
+$('#logout').on('click', logout);
 
 new Clipboard('#copy');

@@ -13,7 +13,10 @@ link(rel='stylesheet', href='styles/team.css')
     label#name-message
     <br /><br />
     if (team.name)
-        label select track
+        label
+            span select track &nbsp;
+            span
+                a(href='details') (know more...)
         each track in ['enabling providers', 'health insights', 'patient love']
             if (team.track == track)
                 input(type='radio', name='track', value=track id=track checked=true)
@@ -48,6 +51,11 @@ if (team.name)
         label your t-shirt size
         input#tshirt(type='text', placeholder='S/M/L/XL/XXL', value=user.tshirt)
         label#tshirt-message
+
+    .t-shirt
+        label
+            a(id='logout')
+                <-- go to home page
 
 include ./common-styles.pug
 include ./scripts.pug
