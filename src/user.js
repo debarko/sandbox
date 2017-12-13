@@ -28,7 +28,7 @@ let auth = (req, res) => {
                 db.query(searchQuery, [username], (err, result) => {
                     if (err) throw err;
                     if (result.rows.length) {
-                        continue_auth(values);
+                        continue_auth(values, req, res);
                     } else {
                         res.redirect('/');
                     }
@@ -38,7 +38,7 @@ let auth = (req, res) => {
     });
 };
 
-let continue_auth = (values) => {
+let continue_auth = (values, req, res) => {
     let query = `INSERT INTO users (github_id, username, token, name, email) `;
     query += `VALUES($1, $2, $3, $4, $5) `;
     query += `ON CONFLICT (github_id) DO UPDATE SET token = $6`;
