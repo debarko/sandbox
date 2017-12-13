@@ -22,19 +22,33 @@ let auth = (req, res) => {
             let username = user.login;
             let name = user.name;
             let email = user.email;
-            let query = `INSERT INTO users (github_id, username, token, name, email) `;
-            query += `VALUES($1, $2, $3, $4, $5) `;
-            query += `ON CONFLICT (github_id) DO UPDATE SET token = $6`;
-            let values = [github_id, username, token, name, email, token];
-            db.query(query, values, (err, result) => {
-                if (err) throw err;
-                if (req.cookies.teamintent) res.redirect('/join');
-                else res.redirect('/team');
-
-            });
+            if (1) { //Turn on Registration END Mode
+                let searchQuery = `SELECT * from users where username = $1`;
+                db.query(searchQuery, [username], (err, result) => {
+                    if (err) throw err;
+                    if (result.rows.length) {
+                        res.redirect('/');
+                    } else {
+                        continue_auth(github_id, username, token, name, email, token);
+                    }
+                })
+            }
         });
     });
 };
+
+let continue_auth = (github_id, username, token, name, email, token) => {
+    let query = `INSERT INTO users (github_id, username, token, name, email) `;
+    query += `VALUES($1, $2, $3, $4, $5) `;
+    query += `ON CONFLICT (github_id) DO UPDATE SET token = $6`;
+    let values = [github_id, username, token, name, email, token];
+    db.query(query, values, (err, result) => {
+        if (err) throw err;
+        if (req.cookies.teamintent) res.redirect('/join');
+        else res.redirect('/team');
+
+    });
+}
 
 let tshirt = (req, res) => {
     let size = req.body.size;
