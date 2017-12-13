@@ -28,9 +28,9 @@ let auth = (req, res) => {
                 db.query(searchQuery, [username], (err, result) => {
                     if (err) throw err;
                     if (result.rows.length) {
-                        res.redirect('/');
-                    } else {
                         continue_auth(values);
+                    } else {
+                        res.redirect('/');
                     }
                 })
             }
